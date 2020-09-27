@@ -1,0 +1,98 @@
+<div class="row">
+  <div class="col-lg-12 text-center" >
+    <h1>Eat-Da-Burger!</h1>
+    <img src="/assets/img/burger.png" alt="Image of a burger" width="250" height="250">
+    
+    <h2>Add a burger</h2>
+    <form class="create-form">
+
+      <div class="form-group">
+        <label for="burgerName"><strong>Burger Name:</strong></label>
+        <input type="text" id="burgerID" name="burgerName">
+        <button type="submit" class="btn btn-success">Add Burger</button>
+      </div>
+
+      <div class="form-group">
+        <input id="devoured" type="checkbox" name="devoured" value="0" checked style="display:none;">
+      </div>
+
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-6 p-5">
+  <h2>Uneaten Burgers!</h2>
+  <ul>
+    {{#each burgers}}
+      {{#unless devoured}}
+        <li>
+          {{burger_name}}
+            <button class="change-devoured btn btn-danger" data-id="{{id}}" data-newdevoured="1">
+              {{#if devoured}}{{else}}devour!{{/if}}
+            </button>
+        </li>
+      {{/unless}}
+    {{/each}}
+  </ul>
+</div>
+<div class="col-lg-6  p-5">
+  <h2>Devoured Burgers!</h2>
+  <ul>
+    {{#each burgers}}
+      {{#if devoured}}
+        <li>
+          {{burger_name}}
+        </li>
+      {{/if}}
+    {{/each}}
+  </ul>
+</div>
+</div>
+
+<script>
+$(function() {
+  $(".change-devoured").on("click", function(event) {
+    var id = $(this).data("id");
+    var newdevoured = $(this).data("newdevoured");
+
+    var newdevouredState = {
+      devoured: newdevoured
+    };
+
+    // Send the PUT request.
+    $.ajax("/api/burgers/" + id, {
+      type: "PUT",
+      data: newdevouredState
+    }).then(
+      function() {
+        console.log("changed devoured to", newdevoured);
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
+
+  $(".create-form").on("submit", function(event) {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+
+    var newburger = {
+      burger_name: $("#burgerID").val().trim(),
+      devoured: $("[name=devoured]:checked").val().trim()
+    };
+
+    // Send the POST request.
+    $.ajax("/api/burgers", {
+      type: "POST",
+      data: newburger
+    }).then(
+      function() {
+        console.log("created new burger");
+        // Reload the page to get the updated list
+        location.reload();
+      }
+    );
+  });
+});
+
+</script>
