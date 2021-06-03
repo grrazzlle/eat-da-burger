@@ -1,5 +1,5 @@
 
-  # **[Burger](http://github.com/grrazzlle/Burger)**
+  # **[Burger](http://github.com/grrazzlle/eat-da-burger)**
   
   [![License: None](https://img.shields.io/badge/License-None-blue.svg)](https://choosealicense.com/)
 
@@ -19,11 +19,11 @@
 
   ## Installation
 
-  run the schema and seeds in the db folder in mysql, set up connection in the config folder, then run server.js
+  Run the schema and seeds in the db folder in mysql, set up connection in the config folder, then run server.js
 
   ## Usage
 
-  add a burger and click submit, and click devour to move it to the other side
+  Add a burger and click submit, and click devour to move it to the other side
 
   ## Licence
 
