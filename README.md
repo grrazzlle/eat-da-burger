@@ -1,5 +1,5 @@
 
-  # **[Burger](http://github.com/grrazzlle/eat-da-burger)**
+  # **[Eat-Da-Burger](http://github.com/grrazzlle/eat-da-burger)**
   
   [![License: None](https://img.shields.io/badge/License-None-blue.svg)](https://choosealicense.com/)
 
